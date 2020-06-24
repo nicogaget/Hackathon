@@ -3,6 +3,6 @@
 @import "../../node_modules/bootswatch/dist/minty/bootswatch";
 
 body {
-  background-color: lightgray;
-  font-family: 'Raleway', sans-serif;
+    background-color: lightgray;
+    font-family: 'Raleway', sans-serif;
 }
