@@ -2,11 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Raleway&display=swap" rel="stylesheet">
+        {% endblock %}
     </head>
     <body>
+<<<<<<< HEAD
         {% block body %}{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+=======
+        {% block body %}
+        {% endblock %}
         {% block javascripts %}{% endblock %}
+>>>>>>> 680ffee300eec10957ed957bce10872d34939b01
     </body>
 </html>
