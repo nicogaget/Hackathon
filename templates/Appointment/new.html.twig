@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">{{ form_label(form.adress) }}</h4>
+                <p class="card-text">{{ form_widget(form.adress) }}</p>
+            </div>
+        </div>
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">{{ form_label(form.date) }}</h4>
+                <p class="card-text">{{ form_widget(form.date) }}</p>
+            </div>
+        </div>
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-body">
+                <h4 class="card-title">{{ form_label(form.message) }}</h4>
+                <p class="card-text">{{ form_widget(form.message) }}</p>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <button type="button" class="btn form-button btn-primary">{{ button_label|default('Confirmer') }}</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
