@@ -1,5 +1,8 @@
-@import "~bootstrap/scss/bootstrap";
+@import "../../node_modules/bootswatch/dist/minty/variables";
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import "../../node_modules/bootswatch/dist/minty/bootswatch";
 
 body {
-    background-color: #d3d3d3;
+    background-color: lightgray;
+    font-family: 'Raleway', sans-serif;
 }
