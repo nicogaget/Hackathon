@@ -8,15 +8,15 @@
     <div class="text">
         <p>Vous cherchez un.e médecin :</p>
         <ul>
-            <li>à l'adresse <strong>{#{{ rdv.adress }}#}</strong></li>
-            <li>au créneau horaire <strong>{#{{ rdv.creneau }}#}</strong></li>
-            <li>pour <strong>{#{{ patient.first_name }} {{ patient.last_name }}#}</strong></li>
+            <li>à l'adresse <strong>{{ rdv.adress }}</strong></li>
+            <li>au créneau horaire <strong>{{ rdv.creneau }}</strong></li>
+            <li>pour <strong>{{ patient.first_name }} {{ patient.last_name }}</strong></li>
         </ul>
         <p>Votre message :</p><br>
-            <p>{#{{ rdv.message }}#}</p>
+            <p>{{ rdv.message }}</p>
     </div>
     <h6>DoctoMoov vous tiendra informé.e dès qu'un médecin validera votre demande.</h6>
 
-    <button type="button" onclick="window.location.href='#'{#'{{ path {'patient_profile'} }}';#}" class="btn btn-primary btn-lg btn-block">Retour à mon profil</button>
+    <button type="button" onclick="window.location.href={{ path {'patient_index'} }};" class="btn btn-primary btn-lg btn-block">Retour à l'accueil</button>
 </div>
 {% endblock %}
