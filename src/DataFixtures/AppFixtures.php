@@ -46,12 +46,16 @@ class AppFixtures extends Fixture
         $this->addReference("type_patient", $typePatient);
         $creneauMatin = new Creneau();
         $creneauAm = new Creneau();
+        $creneauAsap = new Creneau();
         $creneauMatin->setTitle("Matin");
         $creneauAm->setTitle("Aprés-Midi");
+        $creneauAsap->setTitle("Asap");
         $manager->persist($creneauMatin);
         $manager->persist($creneauAm);
+        $manager->persist($creneauAsap);
         $this->addReference("cr_matin", $creneauMatin);
         $this->addReference("cr_am", $creneauAm);
+        $this->addReference("cr_asap", $creneauAsap);
 
      
         
@@ -81,7 +85,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $this::NB_PATIENT; $i++) {
             $aRdv =new Rdv();
             //  $aRdv->setAdress("");
-            $aRdv->setDate($faker->dateTime);
+            $aRdv->setDate(new \DateTime('now'));
             $aRdv->setIsActive(true);
             $aRdv->setRdvOrder($i);
             $aRdv->setMessage($faker->realText());
@@ -89,10 +93,13 @@ class AppFixtures extends Fixture
             // binary switch for set practionner or not 
             if(rand(0,1)){
                 $aRdv->setPractitioner($this->getReference("practitian_0"));
-                if(rand(0,1)) {
+                $val = rand(0, 2);
+                if($val === 0 ) {
                     $aRdv->setCreneau($this->getReference("cr_matin"));
-                } else {
+                } elseif ( $val === 1) {
                     $aRdv->setCreneau($this->getReference("cr_am"));
+                } else {
+                    $aRdv->setCreneau($this->getReference("cr_asap"));
                 }
             }
             $manager->persist($aRdv);
