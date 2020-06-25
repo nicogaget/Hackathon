@@ -53,6 +53,11 @@ class Rdv
      */
     private $creneau;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $adress;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +143,18 @@ class Rdv
     public function setCreneau(?Creneau $creneau): self
     {
         $this->creneau = $creneau;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
 
         return $this;
     }

@@ -3,6 +3,21 @@
 @import "../../node_modules/bootswatch/dist/minty/bootswatch";
 
 body {
-  background-color: lightgray;
-  font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif;
+}
+
+.confirmation {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .text {
+    font-size: 16px;
+    text-align: left;
+    padding: 20px;
+  }
+  button {
+    margin: 20px;
+  }
 }
