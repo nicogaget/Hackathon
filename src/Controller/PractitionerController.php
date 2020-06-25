@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\User;
 use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
+use App\Entity\Rdv;
 use App\Services\GeocodingService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,14 +17,31 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
+     /** @Route("/", name="practitioner_index")
+     * @param GeocodingService $geocoding
+     * @return Response
+     */
+    public function index()
+    {
+        $pract = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(["lastName" => "Doctor0"]);
+
+        $rdv = $this->getDoctrine()
+            ->getRepository(RDV::class)
+            ->findBy(["practitioner" => $pract]);
+        return $this->render('practitioner/index.html.twig', [
+            'rdvs' => $rdv,
+        ]);
+    }
+
     /**
      * @Route("/list", name="practitioner_list")
      * @param GeocodingService $geocoding
      * @return Response
      */
-    public function rdvlist (GeocodingService $geocoding)
+    public function rdvlist(GeocodingService $geocoding)
     {
-
 
         // affectation  coordonées du docteur
         $doctor = $this->getDoctrine()
@@ -57,11 +73,15 @@ class PractitionerController extends AbstractController
             $aPatient = $patients[$i];
             // affectation coordonées user
             if(!$aPatient->getCoordX()) {
-                $gps = $geocoding->addresstoGPS($$aPatient->getAdress());
+                $gps = $geocoding->addresstoGPS($aPatient->getAdress());
                 $coordX = $gps["features"][0]['geometry']['coordinates'][1];
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
+                $rdv = $aPatient->getRdv();
+                if ($rdv) {
+
+                }
                 $entityManager->persist($aPatient);
             }
 
@@ -74,6 +94,20 @@ class PractitionerController extends AbstractController
 
         return $this->render('practitioner/list.html.twig', [
             'gps' => $gps,
+        ]);
+    }
+
+    /**
+     * @Route ("/map", name="practitioner_map")
+     */
+    public function map()
+    {
+        $rdvs = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findBy(['isActive' => 1]);
+
+        return $this->render('/practitioner/map.html.twig', [
+            'rdvs' => $rdvs
         ]);
     }
 }
