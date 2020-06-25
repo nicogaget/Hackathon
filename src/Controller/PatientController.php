@@ -48,7 +48,9 @@ class PatientController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
-                ->findOneBy(["id" => 2]);
+
+                ->findOneBy(["lastName" => "Alves"]);
+
             $rdv->setIsActive(1);
             $rdv->setPatient($user);
 
@@ -73,7 +75,7 @@ class PatientController extends AbstractController
     {
         $patient = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(["id" => $rdv->getPatient()]);;
+            ->findOneBy(["id" => $rdv->getPatient()]);
 
         return $this->render('patient/confirmation.html.twig', [
             'rdv' => $rdv,
