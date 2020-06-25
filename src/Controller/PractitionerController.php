@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
 use App\Services\GeocodingService;
 
@@ -35,11 +36,14 @@ class PractitionerController extends AbstractController
         $coordY = $gps["features"][0]['geometry']['coordinates'][0];
         $doctor->setCoordX($coordX);
         $doctor->setCoordY($coordY);
-        $type = $doctor->getType();
+
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($doctor);
 
+
+        // liste des rdv eligible pour le docteur
+        $rdvList = [];
 
         // recupération des autres users et affectation des coordonées si pas deja existantes
         $patients = $doctor = $this->getDoctrine()
@@ -47,16 +51,31 @@ class PractitionerController extends AbstractController
             ->findAllNotInlude("Doctor");
         for($i =0 ; $i < count($patients) ; $i++)
         {
-            if(!$patients[$i]->getCoordX()) {
-                $gps = $geocoding->addresstoGPS($patients[$i]->getAdress());
+            /**
+             * @var User[]
+             */
+            $aPatient = $patients[$i];
+            // affectation coordonées user
+            if(!$aPatient->getCoordX()) {
+                $gps = $geocoding->addresstoGPS($$aPatient->getAdress());
                 $coordX = $gps["features"][0]['geometry']['coordinates'][1];
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
-                $patients[$i]->setCoordX($coordX);
-                $patients[$i]->setCoordY($coordY);
-                $entityManager->persist($patients[$i]);
+                $aPatient->setCoordX($coordX);
+                $aPatient->setCoordY($coordY);
+                $entityManager->persist($aPatient);
             }
+
+            // ajout du  rdv a la liste , mettre les test ici
+            $rdv = $aPatient->getRdv();
+            $rdvList[] =$rdv;
+
         }
         $entityManager->flush();
+
+
+
+
+
 
         return $this->render('practitioner/list.html.twig', [
             'gps' => $gps,
