@@ -11,7 +11,6 @@ use App\Entity\Rdv;
 use App\Entity\Creneau;
 use Faker;
 use Symfony\Component\Validator\Constraints\DateTime;
-use App\Services\GeocodingService;
 
 class AppFixtures extends Fixture
 {
