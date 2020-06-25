@@ -51,7 +51,6 @@ class PractitionerController extends AbstractController
         $doctor->setCoordX($coordX);
         $doctor->setCoordY($coordY);
 
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($doctor);
 
@@ -76,11 +75,8 @@ class PractitionerController extends AbstractController
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
-                $rdv = $aPatient->getRdv();
-                if ($rdv) {
-
-                }
                 $entityManager->persist($aPatient);
+
             }
 
             // ajout du  rdv a la liste , mettre les test ici
@@ -124,4 +120,5 @@ class PractitionerController extends AbstractController
             'rdvs' => $rdvs
         ]);
     }
+
 }

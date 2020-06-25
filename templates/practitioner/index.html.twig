@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container-fluid">
         <h1>Vos prochains RDV</h1>
-        <small>Voir sur une carte</small>
+        <small><a href="{{ path('practitioner_map') }}">Voir sur une carte</a></small>
         <div class="rdv-list d-flex align-items-center flex-column flex-fill">
             {% for rdv in rdvs %}
                 <div class="card border-secondary mb-3" style="max-width: 18rem;">
