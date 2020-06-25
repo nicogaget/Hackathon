@@ -32,12 +32,8 @@ class PractitionerController extends AbstractController
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
 
-        $geoservice = new GeoService();
-        $distance = $geoservice->calcDistance($pract->getCoordX(), $pract->getCoordY(), $rdv->getLatitude(), $rdv->getLongitude());
-
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
-            'distance' => $distance,
         ]);
     }
 
@@ -128,6 +124,27 @@ class PractitionerController extends AbstractController
         return $this->render('/practitioner/map.html.twig', [
             'rdvs' => $rdvs
         ]);
+    }
+
+    /**
+     * @Route ("/accept/{id}", name="practitioner_map_solo")
+     * @param Rdv $rdv
+     * @return Response
+     */
+    public function acceptRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $pract = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+
+        $rdv->setPractitioner($pract);
+
+        $entityManager->persist($rdv);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('practitioner_index');
     }
 
 }
