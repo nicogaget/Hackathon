@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Se connecter en tant que :</h1>
+        <div class="row index-row">
+            <div class="col-12 d-flex align-items-center flex-column"><a href="{{ path('patient_index') }}" class="btn btn-primary index-btn">Patient</a></div>
+            <div class="col-12 d-flex align-items-center flex-column"><a href="{{ path('practitioner_index') }}" class="btn btn-secondary index-btn">Personnel
+                    soignant</a></div>
+        </div>
+    </div>
+{% endblock %}
