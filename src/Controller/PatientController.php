@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\Rdv;
@@ -10,11 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/patient")
  */
 class PatientController extends AbstractController
 {
+    /**
+     * @return Response
+     * @Route("/index",name="patient_index")
+     */
+    public function index()
+    {
+        return $this->render('patient/index.html.twig');
+    }
+    
     /**
      * @Route("/rdv", name="patient_rdv", methods={"GET","POST"})
      * @param Request $request
@@ -62,4 +73,5 @@ class PatientController extends AbstractController
             'patient' => $patient
         ]);
     }
+
 }
