@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Services\GeocodingService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
@@ -33,7 +34,6 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
         $faker = Faker\Factory::create('fr_FR');
         // standalone fixtures Type  and creneau
         $typeDoctor = new Type();
