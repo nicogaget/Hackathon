@@ -1,4 +1,4 @@
-{%  extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <div class="container-fluid">
@@ -20,7 +20,9 @@
         {% else %}
         <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
 
-            <a href="{{ path ('patient_rdv') }}" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+            <a href="{{ path ('patient_rdv') }}">
+                <button class="btn btn-primary btn-lg">Demander un rendez-vous</button>
+            </a>
 
         </div>
         {% endif %}

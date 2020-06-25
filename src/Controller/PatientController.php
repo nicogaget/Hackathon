@@ -48,8 +48,7 @@ class PatientController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
-
-                ->findOneBy(["lastName" => "Alves"]);
+                ->findOneBy(["lastName" => "Martinot"]);
 
             $rdv->setIsActive(1);
             $rdv->setPatient($user);
