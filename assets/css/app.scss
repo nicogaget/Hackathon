@@ -5,33 +5,28 @@
 body {
     background-color: #ffffff;
     font-family: 'Raleway', sans-serif;
-
 }
-h1{
+
+h1 {
     text-align: center;
 }
-#nav-bar{
+
+#nav-bar {
     a {
     font-size: 1.7em;
     }
 }
 
 #rdv-button {
-
     display: flex;
     justify-content: center;
     margin-top: 150px;
     width: 100%;
-
-    button{
+    button {
         padding: 10px;
         max-width: 310px;
         font-size: 40px;
     }
-}
-
-
-    font-family: 'Raleway', sans-serif;
 }
 
 .confirmation {
