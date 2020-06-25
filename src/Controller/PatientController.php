@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PatientController extends AbstractController
 {
-  {
     /**
      * @return Response
      * @Route("/index",name="patient_index")
