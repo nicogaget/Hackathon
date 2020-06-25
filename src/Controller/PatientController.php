@@ -23,9 +23,11 @@ class PatientController extends AbstractController
      */
     public function index()
     {
+
+
         return $this->render('patient/index.html.twig');
     }
-    
+
     /**
      * @Route("/rdv", name="patient_rdv", methods={"GET","POST"})
      * @param Request $request
