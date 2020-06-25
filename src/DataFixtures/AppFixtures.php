@@ -71,6 +71,13 @@ class AppFixtures extends Fixture
         }
 
         // patients creation
+        $aPatient = new  User();
+        $aPatient->setFirstName("Matthieu");
+        $aPatient->setLastName("Martinot");
+        $aPatient->setType($this->getReference("type_patient"));
+        $aPatient->setAdress($this::ADDRESS[$i]);
+        $this->addReference("patient_$50", $aPatient);
+        $manager->persist($aPatient);
         for ($i = 0; $i < $this::NB_PATIENT; $i++) {
             $aPatient = new  User();
             $aPatient->setFirstName($faker->firstName);
