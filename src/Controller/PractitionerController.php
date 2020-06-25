@@ -73,11 +73,15 @@ class PractitionerController extends AbstractController
             $aPatient = $patients[$i];
             // affectation coordonées user
             if(!$aPatient->getCoordX()) {
-                $gps = $geocoding->addresstoGPS($$aPatient->getAdress());
+                $gps = $geocoding->addresstoGPS($aPatient->getAdress());
                 $coordX = $gps["features"][0]['geometry']['coordinates'][1];
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
+                $rdv = $aPatient->getRdv();
+                if ($rdv) {
+
+                }
                 $entityManager->persist($aPatient);
             }
 
