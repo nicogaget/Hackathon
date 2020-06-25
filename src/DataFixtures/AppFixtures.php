@@ -57,8 +57,8 @@ class AppFixtures extends Fixture
         $this->addReference("cr_am", $creneauAm);
         $this->addReference("cr_asap", $creneauAsap);
 
-     
-        
+
+
         // doctor creation
         for ($i = 0; $i < $this::NB_PRACT; $i++) {
             $aPractician = new  User();
@@ -84,13 +84,13 @@ class AppFixtures extends Fixture
         // meet creation
         for ($i = 0; $i < $this::NB_PATIENT; $i++) {
             $aRdv =new Rdv();
-            //  $aRdv->setAdress("");
+            $aRdv->setAdress($this::ADDRESS[$i]);
             $aRdv->setDate(new \DateTime('now'));
             $aRdv->setIsActive(true);
             $aRdv->setRdvOrder($i);
             $aRdv->setMessage($faker->realText());
             $aRdv->setPatient($this->getReference("patient_$i"));
-            // binary switch for set practionner or not 
+            // binary switch for set practionner or not
             if(rand(0,1)){
                 $aRdv->setPractitioner($this->getReference("practitian_0"));
                 $val = rand(0, 2);
