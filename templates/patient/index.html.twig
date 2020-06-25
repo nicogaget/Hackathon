@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="d-flex">
-            <h1 class="text-primary">Médecin à domicile</h1>
+            <p class="text-primary motto pt-5">Prenez un rendez-vous en consultation à domicile</p>
         </div>
         {% if (rdv) %}
         <div>
@@ -17,7 +17,11 @@
         </div>
         {% else %}
         <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
+<<<<<<< HEAD
             <a href="{{ path('patient_rdv')}}" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+=======
+            <a href="{{ path ('patient_rdv') }}" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+>>>>>>> 53daa757b5b49708e8ae9c769cc3de16f7850aea
         </div>
         {% endif %}
     </div>

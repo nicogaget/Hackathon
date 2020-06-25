@@ -3,20 +3,23 @@
 {% block body %}
 <div class="confirmation container-fluid">
     <h1>Récapitulatif</h1>
-        <h2>de ma demande</h2>
 
-    <div class="text">
-        <p>Vous cherchez un.e médecin :</p>
-        <ul>
-            <li>au <strong>{{ rdv.adress }}</strong></li>
-            <li>le <strong>{{ rdv.date|date("d/m/Y") }} {{ rdv.creneau.title }}</strong></li>
-            <li>pour <strong>{{ patient.firstName}} {{ patient.lastName }}</strong></li>
-        </ul>
-        <p>Votre message :</p>
-            <p>{{ rdv.message }}</p>
+    <div class="card shadow-sm border-primary mb-5" style="max-width: 20rem;">
+        <div class="card-body">
+            <p class="card-title">Vous cherchez un.e médecin :</p>
+            <ul class="card-text">
+                <li>au <strong>{{ rdv.adress }}</strong></li>
+                <li>le <strong>{{ rdv.date|date("d/m/Y") }} {{ rdv.creneau.title }}</strong></li>
+                <li>pour <strong>{{ patient.firstName}} {{ patient.lastName }}</strong></li>
+            </ul>
+            <p class="card-footer">Votre message : <br>
+                "{{ rdv.message }}"
+            </p>
+        </div>
     </div>
-    <h6>DoctoMoov vous tiendra informé.e dès qu'un médecin validera votre demande.</h6>
 
-    <a href="{{ path ('patient_rdv') }}" class="btn btn-primary btn-lg btn-block">Retour à l'accueil</a>
+    <h5 class="mb-5 text-secondary">DoctoMoov vous tiendra informé.e dès qu'un médecin validera votre demande.</h5>
+
+    <a href="{{ path ('patient_index') }}" class="btn btn-primary btn-lg btn-block">Retour à l'accueil</a>
 </div>
 {% endblock %}
