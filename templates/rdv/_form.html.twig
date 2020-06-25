@@ -13,9 +13,15 @@
 </div>
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-body">
+        <h4 class="card-title">{{ form_label(form.creneau) }}</h4>
+        <p class="card-text">{{ form_widget(form.creneau) }}</p>
+    </div>
+</div>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-body">
         <h4 class="card-title">{{ form_label(form.message) }}</h4>
         <p class="card-text">{{ form_widget(form.message) }}</p>
     </div>
 </div>
-<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+<button class="btn btn-primary">{{ button_label|default('Confirmer') }}</button>
 {{ form_end(form) }}

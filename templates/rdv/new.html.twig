@@ -3,9 +3,9 @@
 {% block title %}New Rdv{% endblock %}
 
 {% block body %}
-    <h1>Create new Rdv</h1>
+    <div class="container">
+        <h1>Demander un rendez vous</h1>
 
-    {{ include('rdv/_form.html.twig') }}
-
-    <a href="{{ path('rdv_index') }}">back to list</a>
+        {{ include('rdv/_form.html.twig') }}
+    </div>
 {% endblock %}
