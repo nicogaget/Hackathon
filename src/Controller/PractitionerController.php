@@ -28,11 +28,13 @@ class PractitionerController extends AbstractController
         $this->apiKey = $_ENV["API_TOKEN"];
     }
 
-     /** @Route("/", name="practitioner_index")
+     /**
+     * @Route("/", name="practitioner_index")
      * @return Response
      */
     public function index()
     {
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
             ->findBy(["lastName" => "Doctor"]);
