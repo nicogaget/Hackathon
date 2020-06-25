@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1>Vos prochains RDV</h1>
+    <small>Voir sur une carte</small>
+    {% for rdv in rdvs %}
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+            <h4 class="card-title">{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}</h4>
+            <p class="card-text">{{ rdv.adress }}</p>
+            <p class="card-text">{{ rdv.creneau.title }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
