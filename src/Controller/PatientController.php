@@ -55,7 +55,7 @@ class PatientController extends AbstractController
     {
         $patient = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(["id" => $rdv->getPatient()]);;
+            ->findOneBy(["id" => $rdv->getPatient()]);
 
         return $this->render('patient/confirmation.html.twig', [
             'rdv' => $rdv,
