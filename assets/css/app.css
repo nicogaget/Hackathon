@@ -10101,15 +10101,33 @@ legend {
 
 body {
   background-color: #ffffff;
-  font-family: "Raleway", sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: "Pacifico", cursive;
 }
 
 h1 {
   text-align: center;
+  padding: 20px;
 }
 
+header {
+  padding-bottom: 30px;
+}
+
+#nav-bar .navbar-brand {
+  font-size: 1.8em;
+}
 #nav-bar a {
-  font-size: 1.7em;
+  font-size: 1.2em;
+}
+
+.motto {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 #rdv-button {
@@ -10122,6 +10140,17 @@ h1 {
   padding: 10px;
   max-width: 310px;
   font-size: 40px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card ul, .card .card-footer {
+  text-align: left;
 }
 
 .confirmation {
