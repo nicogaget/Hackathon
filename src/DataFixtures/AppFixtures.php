@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $this::NB_PRACT; $i++) {
             $aPractician = new  User();
             $aPractician->setFirstName("A.");
-            $aPractician->setLastName("Doctor$i");
+            $aPractician->setLastName("Doctor");
             $aPractician->setType($this->getReference("type_doctor"));
             $aPractician->setAdress("22 Rue Seguin, 69002 Lyon");
             $this->addReference("practitian_$i", $aPractician);

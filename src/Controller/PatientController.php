@@ -44,10 +44,8 @@ class PatientController extends AbstractController
                 ->findOneBy(["lastName" => "Martinot"]);
             $rdv->setIsActive(1);
             $rdv->setPatient($user);
-
             $entityManager->persist($rdv);
             $entityManager->flush();
-
             return $this->redirectToRoute('patient_confirmation', ['id' => $rdv->getId()]);
         }
 

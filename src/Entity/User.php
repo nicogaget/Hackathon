@@ -50,6 +50,16 @@ class User
      */
     private $patientRdvs;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $coordX;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $coordY;
+
     public function __construct()
     {
         $this->practitionerRdvs = new ArrayCollection();
@@ -167,6 +177,30 @@ class User
                 $patientRdv->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoordX(): ?float
+    {
+        return $this->coordX;
+    }
+
+    public function setCoordX(?float $coordX): self
+    {
+        $this->coordX = $coordX;
+
+        return $this;
+    }
+
+    public function getCoordY(): ?float
+    {
+        return $this->coordY;
+    }
+
+    public function setCoordY(?float $coordY): self
+    {
+        $this->coordY = $coordY;
 
         return $this;
     }
