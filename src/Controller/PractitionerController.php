@@ -78,10 +78,7 @@ class PractitionerController extends AbstractController
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
-                $rdv = $aPatient->getRdv();
-                if ($rdv) {
 
-                }
                 $entityManager->persist($aPatient);
             }
 
@@ -110,4 +107,5 @@ class PractitionerController extends AbstractController
             'rdvs' => $rdvs
         ]);
     }
+
 }
