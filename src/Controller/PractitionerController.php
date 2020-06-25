@@ -18,11 +18,11 @@ class PractitionerController extends AbstractController
 {
     /**
      * @Route("/", name="practitioner_index")
-     * @param GeocodingService $geocoding
      * @return Response
      */
     public function index()
     {
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
             ->findBy(["lastName" => "Doctor0"]);

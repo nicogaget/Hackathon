@@ -6,10 +6,16 @@ namespace App\Controller;
 use App\Entity\Rdv;
 use App\Entity\User;
 use App\Form\RdvType;
+use App\Repository\RdvRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 /**
@@ -23,13 +29,21 @@ class PatientController extends AbstractController
      */
     public function index()
     {
+        $practitioner = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['lastName'=>'doctor']);
+        $patient =$this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['lastName'=>'martinot']);
+
         $rdv = $this->getDoctrine()
             ->getRepository(Rdv::class)
-            ->findOneBy(array('patient'=>2));
-        dump($rdv);
+            ->findOneBy(array('patient'=>$patient));
 
         return $this->render('patient/index.html.twig', [
-            'rdv'=>$rdv
+            'rdv' => $rdv,
+            'patient' => $patient,
+            'practitioner' => $practitioner
         ]);
     }
 
@@ -82,4 +96,25 @@ class PatientController extends AbstractController
         ]);
     }
 
+    /**
+     * @return RedirectResponse
+     * @Route("/deleteRdv", name="delete_rdv")
+     */
+    public function deleteRdv()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $patient =$this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['lastName'=>'martinot']);
+
+        $rdv = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findOneBy(array('patient'=>$patient));
+
+
+            $entityManager->remove($rdv);
+            $entityManager->flush();
+
+        return $this->redirectToRoute('patient_index');
+    }
 }

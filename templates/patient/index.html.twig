@@ -2,22 +2,42 @@
 
 {% block body %}
     <div class="container-fluid">
-        <div class="d-flex">
-            <p class="text-primary motto pt-5">Prenez un rendez-vous en consultation à domicile</p>
-        </div>
-        {% if (rdv) %}
+{{ dump(rdv) }}
+        {% if rdv and rdv.isActive == 1 %}
+
+        {%  if rdv.practitioner is null %}
             <div class="d-flex align-items-center flex-column flex-fill">
                 <div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
-                    <h6 class="card-header">Demande en attente de confirmation :</h6>
-                    <div class="card-body">
-                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> {{ rdv.date|date("d M") }},
-                                le {{ rdv.creneau }}
 
+                    <h2 class="card-header">Demande en attente de confirmation :</h2>
+                    <div class="card-body">
+                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> {{ rdv.date|date("d M") }} {{ rdv.creneau }}
+                    </div>
+                    <div class="d-flex align-items-center flex-column flex-fill">
+{#                        <a class="btn btn-secondary card-rdv-btn" href="{{ path('') }}">supprimer votre demande</a>#}
+{#                    </div>#}
+                        <form method="post" action="{{ path('delete_rdv') }}" >
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-secondary card-rdv-btn">Annuler le rendez-vous</button>
+                        </form>
+                </div>
+            </div>
+        {% else %}
+            <div class="d-flex align-items-center flex-column flex-fill">
+                <div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
+
+                    <h2 class="card-header">Confirmation de Rendez vous</h2>
+                    <div class="card-body">
+                        <h4 class="card-title">Le médecin {{ practitioner.firstName }} {{ practitioner.lastName }} vous confirme sa visite à votre domicile, le {{ rdv.date|date("d M") }} {{ rdv.creneau }}</h4>
                     </div>
                 </div>
             </div>
+        {% endif %}
 
         {% else %}
+        <div class="d-flex">
+            <p class="text-primary motto pt-5">Prenez un rendez-vous en consultation à domicile</p>
+        </div>
         <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
 
             <a href="{{ path ('patient_rdv') }}">
