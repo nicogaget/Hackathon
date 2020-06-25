@@ -26,9 +26,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-<<<<<<< HEAD
-=======
     App\Services\GeocodingService:
         arguments:
-            - '%kernel.project_dir%'
->>>>>>> a78148f833af3066a8b15ab91f1d426274b8b969
+
