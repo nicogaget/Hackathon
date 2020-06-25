@@ -7,6 +7,7 @@ use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
 use App\Entity\Rdv;
 use App\Services\GeocodingService;
+use App\Services\GeoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,15 +22,22 @@ class PractitionerController extends AbstractController
      */
     public function index()
     {
+        $pract=new User;
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(["lastName" => "Doctor"]);
+            ->findOneBy(["lastName" => "Doctor"]);
 
         $rdv = $this->getDoctrine()
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
+
+        $geoservice = new GeoService();
+        $distance = $geoservice->calcDistance($pract->getCoordX(), $pract->getCoordY(), $rdv->getLatitude(), $rdv->getLongitude());
+
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
+            'distance' => $distance,
         ]);
     }
 
@@ -90,6 +98,7 @@ class PractitionerController extends AbstractController
             'gps' => $gps,
         ]);
     }
+
 
     /**
      * @Route ("/map", name="practitioner_map")
