@@ -81,7 +81,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $this::NB_PATIENT; $i++) {
             $aRdv =new Rdv();
             //  $aRdv->setAdress("");
-            $aRdv->setDate($faker->dateTime);
+            $aRdv->setDate(new \DateTime('now'));
             $aRdv->setIsActive(true);
             $aRdv->setRdvOrder($i);
             $aRdv->setMessage($faker->realText());
