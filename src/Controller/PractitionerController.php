@@ -16,11 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
-     /** @Route("/", name="practitioner_index")
+
+     /** 
+     * @Route("/", name="practitioner_index")
      * @return Response
      */
     public function index()
     {
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
             ->findBy(["lastName" => "Doctor"]);
