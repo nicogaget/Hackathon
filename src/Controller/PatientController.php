@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Rdv;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,10 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class PatientController extends AbstractController
 {
     /**
-     * @Route("/confirmation", name="patient_confirmation")
+     * @Route("/confirmation/{id}", name="patient_confirmation")
      */
-    public function confirmation(): Response
+    public function confirmation(Rdv $rdv): Response
     {
-        return $this->render('patient/confirmation.html.twig');
+        $patient = $rdv->getPatient();
+
+        return $this->render('patient/confirmation.html.twig', [
+            'rdv' => $rdv,
+            'patient' => $patient
+        ]);
     }
 }

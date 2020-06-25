@@ -10100,13 +10100,11 @@ legend {
 }
 
 body {
-  background-color: lightgray;
   font-family: "Raleway", sans-serif;
 }
 
 .confirmation {
   text-align: center;
-  margin: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;

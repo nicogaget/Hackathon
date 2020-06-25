@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="confirmation">
+<div class="confirmation container-fluid">
     <h1>Récapitulatif</h1>
         <h2>de ma demande</h2>
 
     <div class="text">
         <p>Vous cherchez un.e médecin :</p>
         <ul>
-            <li>à l'adresse <strong>{#{{ rdv.adresse }}#}</strong></li>
+            <li>à l'adresse <strong>{#{{ rdv.adress }}#}</strong></li>
             <li>au créneau horaire <strong>{#{{ rdv.creneau }}#}</strong></li>
             <li>pour <strong>{#{{ patient.first_name }} {{ patient.last_name }}#}</strong></li>
         </ul>
@@ -17,6 +17,6 @@
     </div>
     <h6>DoctoMoov vous tiendra informé.e dès qu'un médecin validera votre demande.</h6>
 
-    <button type="button" onclick="window.location.href='#'{#'{{ path {'patient_profile'} }}';#}" class="btn btn-secondary btn-lg btn-block">Retour à mon profil</button>
+    <button type="button" onclick="window.location.href='#'{#'{{ path {'patient_profile'} }}';#}" class="btn btn-primary btn-lg btn-block">Retour à mon profil</button>
 </div>
 {% endblock %}
