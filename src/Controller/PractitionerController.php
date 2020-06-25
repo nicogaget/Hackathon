@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Services\GeocodingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +20,14 @@ class PractitionerController extends AbstractController
      * @param GeocodingService $geocoding
      * @return Response
      */
-    public function rdvlist (GeocodingService $geocoding)
+    public function rdvlist (GeocodingService $geocoding )
     {
+        $doctor = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor0"]);
+
         $gps=$geocoding->addresstoGPS();
+        var_dump($gps);
         $address=$geocoding->GPStoadress();
         return $this->render('practitioner/list.html.twig', [
             'gps' => $gps,
