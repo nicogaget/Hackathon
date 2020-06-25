@@ -103,14 +103,14 @@ class AppFixtures extends Fixture
             // binary switch for set practionner or not
             if(rand(0,1)){
                 $aRdv->setPractitioner($this->getReference("practitian_0"));
-                $val = rand(0, 2);
-                if($val === 0 ) {
-                    $aRdv->setCreneau($this->getReference("cr_matin"));
-                } elseif ( $val === 1) {
-                    $aRdv->setCreneau($this->getReference("cr_am"));
-                } else {
-                    $aRdv->setCreneau($this->getReference("cr_asap"));
-                }
+            }
+            $val = rand(0, 2);
+            if ($val === 0) {
+                $aRdv->setCreneau($this->getReference("cr_matin"));
+            } elseif ($val === 1) {
+                $aRdv->setCreneau($this->getReference("cr_am"));
+            } else {
+                $aRdv->setCreneau($this->getReference("cr_asap"));
             }
             $manager->persist($aRdv);
         }
