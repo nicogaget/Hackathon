@@ -19,6 +19,18 @@
             width: 100%;
         }
 
+        .link-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        #link {
+            z-index: 1;
+            position: absolute;
+            bottom: 30px;
+            margin: auto;
+        }
+
         .marker {
             background-image: url('/img/marker.png');
             background-size: cover;
@@ -37,11 +49,16 @@
             font-family: 'Open Sans', sans-serif;
         }
 
+
     </style>
 {% endblock %}
 
 {% block body %}
-    <div id='map'></div>
+    <div id='map'>
+    </div>
+    <div class="link-container">
+        <a href="{{ path ('practitioner_index') }}" id="link" class="btn btn-secondary">Retour aux RDV</a>
+    </div>
 {% endblock %}
 
 
