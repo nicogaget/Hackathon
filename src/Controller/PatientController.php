@@ -25,7 +25,7 @@ class PatientController extends AbstractController
     {
         return $this->render('patient/index.html.twig');
     }
-    
+
     /**
      * @Route("/rdv", name="patient_rdv", methods={"GET","POST"})
      * @param Request $request
@@ -41,7 +41,7 @@ class PatientController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
-                ->findOneBy(["id" => 1]);
+                ->findOneBy(["lastName" => "Martinot"]);
             $rdv->setIsActive(1);
             $rdv->setPatient($user);
 
@@ -66,7 +66,7 @@ class PatientController extends AbstractController
     {
         $patient = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(["id" => $rdv->getPatient()]);;
+            ->findOneBy(["id" => $rdv->getPatient()]);
 
         return $this->render('patient/confirmation.html.twig', [
             'rdv' => $rdv,
