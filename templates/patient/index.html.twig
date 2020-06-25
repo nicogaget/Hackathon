@@ -2,7 +2,6 @@
 
 {% block body %}
     <div class="container-fluid">
-{{ dump(rdv) }}
         {% if rdv and rdv.isActive == 1 %}
 
         {%  if rdv.practitioner is null %}
@@ -11,7 +10,7 @@
 
                     <h2 class="card-header">Demande en attente de confirmation :</h2>
                     <div class="card-body">
-                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> {{ rdv.date|date("d M") }} {{ rdv.creneau }}
+                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> {{ rdv.date|date("d / m ") }}  {{ rdv.creneau }}
                     </div>
                     <div class="d-flex align-items-center flex-column flex-fill">
 {#                        <a class="btn btn-secondary card-rdv-btn" href="{{ path('') }}">supprimer votre demande</a>#}
