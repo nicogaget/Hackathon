@@ -16,7 +16,11 @@
     </head>
     <body>
     <header>{% include 'navbar.html.twig' %}</header>
+
         {% block body %}{% endblock %}
+        <div class="ripple-wrap">
+            <div class="ripple"></div>
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
