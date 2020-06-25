@@ -6,7 +6,7 @@
         <a href="{{ path ('practitioner_map') }}" class="d-flex align-items-center flex-column pb-3">Voir tous les RDV sur la carte</a>
                 <div class="rdv-list d-flex align-items-center flex-column flex-fill">
             {% for rdv in rdvs %}
-                <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card shadow-sm border-secondary mb-3" style="max-width: 18rem;">
                     <div class="card-body">
                         <h4 class="card-title">{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}</h4>
                         <p class="card-text">{{ rdv.adress }}</p>
@@ -18,3 +18,4 @@
         </div>
     </div>
 {% endblock %}
+
