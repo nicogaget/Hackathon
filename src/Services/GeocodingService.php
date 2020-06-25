@@ -12,7 +12,7 @@ class GeocodingService
     private $client;
     private $rootPath;
     private $baseUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
-
+    private $response ;
     private $API_TOKEN = "pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q";
 
     public function __construct(string $rootPath)
@@ -20,9 +20,11 @@ class GeocodingService
         $this->client = HttpClient::create();
         // you can also load several files
         $dotenv = new Dotenv();
-        var_dump($rootPath);
         $this->rootPath = $rootPath;
         $dotenv->load($rootPath . '/.env.local');
+        $apiKey = $_ENV["API_TOKEN"];
+
+
 
     }
 
@@ -30,6 +32,7 @@ class GeocodingService
     {
         $response = $this->client->request('GET', "https://api.mapbox.com/geocoding/v5/mapbox.places/$address.json?access_token=pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q");
         $result = $response->toArray();
+        $this->response=$result;
         return $result;
     }
 

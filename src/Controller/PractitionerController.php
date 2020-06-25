@@ -25,13 +25,12 @@ class PractitionerController extends AbstractController
         $doctor = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(["lastName" => "Doctor0"]);
+        $gps=$geocoding->addresstoGPS($doctor->getAdress());
+        $coordX = $gps["features"][0]['geometry']['coordinates'][1];
+        $coordY = $gps["features"][0]['geometry']['coordinates'][0];
 
-        $gps=$geocoding->addresstoGPS();
-        var_dump($gps);
-        $address=$geocoding->GPStoadress();
         return $this->render('practitioner/list.html.twig', [
             'gps' => $gps,
-            'address' => $address,
         ]);
     }
 }
