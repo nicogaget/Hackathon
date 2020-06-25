@@ -4,6 +4,8 @@
 
 body {
     background-color: #ffffff;
+
+
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -11,8 +13,8 @@ h1, h2, h3, .navbar-brand {
     font-family: 'Pacifico', cursive;
 }
 
-
 h1 {
+
     text-align: center;
     padding: 20px;
 }
@@ -22,6 +24,7 @@ header {
 }
 
 #nav-bar {
+    z-index: 1;
     .navbar-brand {
         font-size: 1.8em;
     }
@@ -46,6 +49,10 @@ header {
         max-width: 310px;
         font-size: 40px;
     }
+}
+
+.card-rdv-btn{
+    margin-bottom: 10px;
 }
 
 .form-container {

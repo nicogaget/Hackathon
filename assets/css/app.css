@@ -10117,6 +10117,9 @@ header {
   padding-bottom: 30px;
 }
 
+#nav-bar {
+  z-index: 1;
+}
 #nav-bar .navbar-brand {
   font-size: 1.8em;
 }
@@ -10140,6 +10143,10 @@ header {
   padding: 10px;
   max-width: 310px;
   font-size: 40px;
+}
+
+.card-rdv-btn {
+  margin-bottom: 10px;
 }
 
 .form-container {
