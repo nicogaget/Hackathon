@@ -11,6 +11,7 @@
                         <h4 class="card-title">{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}</h4>
                         <p class="card-text">{{ rdv.adress }}</p>
                         <p class="card-text">{{ rdv.creneau.title }}</p>
+                        <a href="{{ path('practitioner_map_solo', {'id': rdv.id}) }}">Voir sur la carte</a>
                     </div>
                 </div>
             {% endfor %}
