@@ -32,7 +32,8 @@ class RdvType extends AbstractType
             ->add('adress', null, ['label' => "Adresse de la consultation"])
             ->add('creneau', null, [
                 'choice_label' => 'title',
-                'placeholder' => 'Choisissez votre créneau'
+                'placeholder' => 'Choisissez votre créneau',
+                'by_reference' => 'false'
             ])
         ;
     }
