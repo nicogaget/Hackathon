@@ -34,7 +34,7 @@ class PractitionerController extends AbstractController
     {
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(["lastName" => "Doctor0"]);
+            ->findBy(["lastName" => "Doctor"]);
 
         $rdv = $this->getDoctrine()
             ->getRepository(RDV::class)
@@ -108,9 +108,16 @@ class PractitionerController extends AbstractController
      */
     public function map()
     {
+        $practitioner = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(["lastName" => "Doctor"]);
+
         $rdvs = $this->getDoctrine()
             ->getRepository(Rdv::class)
-            ->findBy(['isActive' => 1]);
+            ->findBy([
+                'isActive' => 1,
+                'practitioner' => $practitioner
+                ]);
 
         return $this->render('/practitioner/map.html.twig', [
             'rdvs' => $rdvs,
