@@ -7,6 +7,7 @@ use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
 use App\Entity\Rdv;
 use App\Services\GeocodingService;
+use App\Services\GeoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpClient\HttpClient;
@@ -35,13 +36,16 @@ class PractitionerController extends AbstractController
     public function index()
     {
 
+        $pract=new User;
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(["lastName" => "Doctor"]);
+            ->findOneBy(["lastName" => "Doctor"]);
 
         $rdv = $this->getDoctrine()
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
+
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
         ]);
@@ -64,7 +68,6 @@ class PractitionerController extends AbstractController
         $coordY = $gps["features"][0]['geometry']['coordinates'][0];
         $doctor->setCoordX($coordX);
         $doctor->setCoordY($coordY);
-
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($doctor);
@@ -90,11 +93,8 @@ class PractitionerController extends AbstractController
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
-                $rdv = $aPatient->getRdv();
-                if ($rdv) {
-
-                }
                 $entityManager->persist($aPatient);
+
             }
 
             // ajout du  rdv a la liste , mettre les test ici
@@ -108,6 +108,7 @@ class PractitionerController extends AbstractController
             'gps' => $gps,
         ]);
     }
+
 
     /**
      * @Route ("/map", name="practitioner_map")
@@ -146,4 +147,26 @@ class PractitionerController extends AbstractController
             'rdvs' => $rdvs
         ]);
     }
+
+    /**
+     * @Route ("/accept/{id}", name="practitioner_map_solo")
+     * @param Rdv $rdv
+     * @return Response
+     */
+    public function acceptRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $pract = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+
+        $rdv->setPractitioner($pract);
+
+        $entityManager->persist($rdv);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('practitioner_index');
+    }
+
 }
