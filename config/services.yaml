@@ -28,4 +28,9 @@ services:
 
     App\Services\GeocodingService:
         arguments:
+            - '%kernel.project_dir%'
+
+    App\Controller\PractitionerController:
+        arguments:
+            - '%kernel.project_dir%'
 

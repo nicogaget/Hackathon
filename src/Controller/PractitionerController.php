@@ -8,6 +8,8 @@ use App\Repository\UserRepository;
 use App\Entity\Rdv;
 use App\Services\GeocodingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,8 +18,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
+    private $apiKey;
 
-     /** 
+    public function __construct(string $rootPath)
+    {
+        $dotenv = new Dotenv();
+        $this->rootPath = $rootPath;
+        $dotenv->load($rootPath . '/.env.local');
+        $this->apiKey = $_ENV["API_TOKEN"];
+    }
+
+     /**
      * @Route("/", name="practitioner_index")
      * @return Response
      */
@@ -43,7 +54,7 @@ class PractitionerController extends AbstractController
      */
     public function rdvlist(GeocodingService $geocoding)
     {
-
+        $gps = $geocoding->addresstoGPS();
         // affectation  coordonées du docteur
         $doctor = $this->getDoctrine()
             ->getRepository(User::class)
@@ -103,12 +114,20 @@ class PractitionerController extends AbstractController
      */
     public function map()
     {
+        $practitioner = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(["lastName" => "Doctor"]);
+
         $rdvs = $this->getDoctrine()
             ->getRepository(Rdv::class)
-            ->findBy(['isActive' => 1]);
+            ->findBy([
+                'isActive' => 1,
+                'practitioner' => $practitioner
+                ]);
 
         return $this->render('/practitioner/map.html.twig', [
-            'rdvs' => $rdvs
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
         ]);
     }
 
