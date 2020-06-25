@@ -52,6 +52,12 @@ class PractitionerController extends AbstractController
      */
     public function map()
     {
-        return $this->render('/practitioner/map.html.twig');
+        $rdvs = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findBy(['isActive' => 1]);
+
+        return $this->render('/practitioner/map.html.twig', [
+            'rdvs' => $rdvs
+        ]);
     }
 }

@@ -22,6 +22,25 @@
             height: 92%;
             width: 100%;
         }
+
+        .marker {
+            background-image: url('/img/marker.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
     </style>
 </head>
 <body>
@@ -59,7 +78,40 @@
         zoom: 10
     });
 
-    // code from the next step will go here!
+
+    var geojson = {
+        type: 'FeatureCollection',
+        features: [
+                {% for rdv in rdvs %}
+            {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [{{ rdv.longitude }}, {{ rdv.latitude }}]
+            },
+            properties: {
+                title: '{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}',
+                description: '{{ rdv.adress }}'
+            }
+        },
+             {% endfor %}
+            ]
+    };
+
+    // add markers to map
+    geojson.features.forEach(function(marker) {
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                .setHTML('<h6>' + marker.properties.title + '</h6><p>' + marker.properties.description + '</p>'))
+            .addTo(map);
+    });
 
 </script>
 {{ encore_entry_script_tags('app') }}
