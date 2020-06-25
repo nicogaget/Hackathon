@@ -1,4 +1,4 @@
-{%  extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
     <div class="container-fluid">
@@ -6,7 +6,9 @@
             <p class="text-primary motto pt-5">Prenez un rendez-vous en consultation à domicile</p>
         </div>
         <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
-            <a href="{{ path ('patient_rdv') }}" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+            <a href="{{ path ('patient_rdv') }}">
+                <button class="btn btn-primary btn-lg">Demander un rendez-vous</button>
+            </a>
         </div>
     </div>
 {% endblock %}

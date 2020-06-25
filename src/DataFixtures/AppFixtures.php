@@ -48,8 +48,8 @@ class AppFixtures extends Fixture
         $creneauAm = new Creneau();
         $creneauAsap = new Creneau();
         $creneauMatin->setTitle("Matin");
-        $creneauAm->setTitle("Aprés-Midi");
-        $creneauAsap->setTitle("Asap");
+        $creneauAm->setTitle("Après-Midi");
+        $creneauAsap->setTitle("Dès que possible");
         $manager->persist($creneauMatin);
         $manager->persist($creneauAm);
         $manager->persist($creneauAsap);
