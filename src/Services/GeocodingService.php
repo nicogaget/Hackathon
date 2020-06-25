@@ -13,7 +13,6 @@ class GeocodingService
     private $rootPath;
     private $baseUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
     private $response ;
-    private $API_TOKEN = "pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q";
 
     public function __construct(string $rootPath)
     {

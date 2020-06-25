@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Rdv;
 use App\Entity\User;
 use App\Services\GeocodingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
+    private $apiKey;
+
+    public function __construct(string $rootPath)
+    {
+        $dotenv = new Dotenv();
+        $this->rootPath = $rootPath;
+        $dotenv->load($rootPath . '/.env.local');
+        $this->apiKey = $_ENV["API_TOKEN"];
+    }
+
      /** @Route("/", name="practitioner_index")
      * @param GeocodingService $geocoding
      * @return Response
@@ -100,7 +113,8 @@ class PractitionerController extends AbstractController
             ->findBy(['isActive' => 1]);
 
         return $this->render('/practitioner/map.html.twig', [
-            'rdvs' => $rdvs
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
         ]);
     }
 }

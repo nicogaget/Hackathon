@@ -44,11 +44,12 @@
     <div id='map'></div>
 {% endblock %}
 
+
 {% block javascripts %}
     {{ parent() }}
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q';
+        mapboxgl.accessToken = "{{ apiKey }}";
 
         var map = new mapboxgl.Map({
             container: 'map',
