@@ -72,11 +72,6 @@ class PractitionerController extends AbstractController
         }
         $entityManager->flush();
 
-
-
-
-
-
         return $this->render('practitioner/list.html.twig', [
             'gps' => $gps,
         ]);
