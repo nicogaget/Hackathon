@@ -10100,8 +10100,23 @@ legend {
 }
 
 body {
-  background-color: lightgray;
   font-family: "Raleway", sans-serif;
+}
+
+.confirmation {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.confirmation .text {
+  font-size: 16px;
+  text-align: left;
+  padding: 20px;
+}
+.confirmation button {
+  margin: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */
