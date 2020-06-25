@@ -10117,6 +10117,9 @@ header {
   padding-bottom: 30px;
 }
 
+#nav-bar {
+  z-index: 1;
+}
 #nav-bar .navbar-brand {
   font-size: 1.8em;
 }
