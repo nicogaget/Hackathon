@@ -23,9 +23,14 @@ class PatientController extends AbstractController
      */
     public function index()
     {
+        $rdv = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findOneBy(array('patient'=>2));
+        dump($rdv);
 
-
-        return $this->render('patient/index.html.twig');
+        return $this->render('patient/index.html.twig', [
+            'rdv'=>$rdv
+        ]);
     }
 
     /**
@@ -43,7 +48,7 @@ class PatientController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user = $this->getDoctrine()
                 ->getRepository(User::class)
-                ->findOneBy(["id" => 1]);
+                ->findOneBy(["id" => 2]);
             $rdv->setIsActive(1);
             $rdv->setPatient($user);
 

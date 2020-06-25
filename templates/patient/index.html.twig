@@ -5,9 +5,21 @@
         <div class="d-flex">
             <h1 class="text-primary">Médecin à domicile</h1>
         </div>
-        <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
-            <a href="#" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+        {% if (rdv) %}
+        <div>
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Rendez vous</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ rdv.date|date("m/d/Y") }}</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
         </div>
+        {% else %}
+        <div class="btn-group" id="rdv-button" role="group" aria-label="Basic example">
+            <a href="{{ path('patient_rdv')}}" ><button class="btn btn-primary btn-lg">Demander un rendez-vous</button></a>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
 
