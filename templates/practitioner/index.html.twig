@@ -22,6 +22,7 @@
             {% for rdv in rdvs %}
                 <div class="card shadow-sm border-secondary mb-3" style="min-width: 22rem;">
                     <div class="card-body">
+                        <a href="{{ path('practitioner_delete_rdv', {'id': rdv.id}) }}" class="close">&times;</a>
                         <h4 class="card-title pract-card">{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}</h4>
                         <p class="card-text">{{ rdv.adress }}</p>
                         <p class="card-text">{{ rdv.creneau.title }}</p>
