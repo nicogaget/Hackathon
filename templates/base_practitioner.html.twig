@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bienvenue !{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Pacifico&display=swap" rel="stylesheet">
+
+        <script type="text/javascript" charset="utf8" src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
+        <script type="text/javascript" charset="utf8" src="{{ asset('assets/js/moment.min.js') }}"></script>
+        <script type="text/javascript" charset="utf8" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" charset="utf8" src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+<header>{% include 'navbar_practitioner.html.twig' %}</header>
+{% block body %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>
