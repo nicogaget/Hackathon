@@ -57,8 +57,6 @@ class PractitionerController extends AbstractController
 
         if ($nbrFreeRdv > 0){
             $this->addFlash('warning', "$nbrFreeRdv nouvelle(s) demandes(s) de visite sur votre secteur" );
-        } else {
-            $this->addFlash('warning', "Aucune demande de visite en attente" );
         }
 
 
@@ -157,7 +155,7 @@ class PractitionerController extends AbstractController
         ]);
     }
 
-     /*
+    /**
      * @Route ("/delete/{id}", name="practitioner_delete_rdv")
      * @param Rdv $rdv
      * @return Response
@@ -165,10 +163,8 @@ class PractitionerController extends AbstractController
     public function deleteRDV(RDV $rdv)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
         $entityManager->remove($rdv);
         $entityManager->flush();
-
         return $this->redirectToRoute('practitioner_index');
     }
 

@@ -9,11 +9,11 @@
 
         {%  if rdv.practitioner is null %}
             <div class="d-flex align-items-center flex-column flex-fill">
-                <div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
+                <div class="card text-white bg-secondary mb-3 " style="max-width: 20rem;">
 
                     <h2 class="card-header">Demande en attente de confirmation :</h2>
-                    <div class="card-body">
-                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> <b>{{ rdv.date|date("d / m ") }}  {{ rdv.creneau }}</b>
+                    <div class="card-body bg-light">
+                        <h4 class="card-title bg-light" style="color: gray">Vous avez fait une demande de consultation pour le<br> <b>{{ rdv.date|date("d / m ") }}  {{ rdv.creneau }}</b>
                     </div>
                     <div class="d-flex align-items-center flex-column flex-fill">
 {#                        <a class="btn btn-secondary card-rdv-btn" href="{{ path('') }}">supprimer votre demande</a>#}
@@ -26,11 +26,11 @@
             </div>
         {% else %}
             <div class="d-flex align-items-center flex-column flex-fill">
-                <div class="card text-white bg-primary mb-3 " style="max-width: 20rem;">
+                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
 
                     <h2 class="card-header">Confirmation de Rendez vous</h2>
-                    <div class="card-body">
-                        <h4 class="card-title">Le médecin {{ practitioner.firstName }} {{ practitioner.lastName }} vous confirme sa visite à votre domicile, le <b>{{ rdv.date|date("d M") }} {{ rdv.creneau }}</b></h4>
+                    <div class="card-body bg-light">
+                        <h4 class="card-title bg-light" style="color: gray">Le médecin {{ practitioner.firstName }} {{ practitioner.lastName }} vous confirme sa visite à votre domicile, le <br><b>{{ rdv.date|date("d / m") }} {{ rdv.creneau }}</b></h4>
                     </div>
                 </div>
             </div>

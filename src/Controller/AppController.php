@@ -45,7 +45,7 @@ class AppController extends AbstractController
             }
         }
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $geo = new GeoService();
             $rdv = $rdvList[$i];
             $dctLatitude = $doctor->getCoordX();

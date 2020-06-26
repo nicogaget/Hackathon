@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
         }
 
         // meet creation
-        for ($i = 0; $i < $this::NB_PATIENT; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $aRdv =new Rdv();
             $aRdv->setAdress($this::ADDRESS[$i]);
             $aRdv->setDate(new \DateTime('now'));

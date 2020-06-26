@@ -7,6 +7,8 @@ use App\Entity\Rdv;
 use App\Entity\User;
 use App\Form\RdvType;
 use App\Repository\RdvRepository;
+use App\Services\GeocodingService;
+use App\Services\GeoService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -81,8 +83,28 @@ class PatientController extends AbstractController
      * @param Rdv $rdv
      * @return Response
      */
-    public function confirmation(Rdv $rdv): Response
+    public function confirmation(Rdv $rdv, GeocodingService $geocoding): Response
     {
+        $doctor = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+
+        $gps = $geocoding->addresstoGPS($rdv->getAdress());
+        $lat = $gps["features"][0]['geometry']['coordinates'][1];
+        $long = $gps["features"][0]['geometry']['coordinates'][0];
+        $rdv->setLatitude($lat);
+        $rdv->setLongitude($long);
+        $geo = new GeoService();
+        $dctLatitude = $doctor->getCoordX();
+        $dctLongitude = $doctor->getCoordY();
+        $rdvLat = $rdv->getLatitude();
+        $rdvLong = $rdv->getLongitude();
+        $distance = $geo->calcDistance($dctLatitude, $dctLongitude, $rdvLat, $rdvLong);
+        $rdv->setDistance($distance);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($rdv);
+        $em->flush();
+
         $patient = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(["id" => $rdv->getPatient()]);
