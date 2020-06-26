@@ -165,10 +165,8 @@ class PractitionerController extends AbstractController
     public function deleteRDV(RDV $rdv)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
         $entityManager->remove($rdv);
         $entityManager->flush();
-
         return $this->redirectToRoute('practitioner_index');
     }
 
