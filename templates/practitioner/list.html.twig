@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
     {% block body %}
         <div class="container-fluid">
-            <h1>Choisissez un rdv,</h1>
+            <h1>Choisissez un rdv</h1>
             <div class="rdv-list d-flex align-items-center flex-column flex-fill">
 
                 {% for rdv in rdvs %}
@@ -15,7 +15,7 @@
                             <p class="card-text">Distance : {{ rdv.distance|round()}} Km.</p>
                             <a href="{{ path ('practitioner_accept_rdv', { "id": rdv.id }) }}" class="btn btn-primary
                             btn-lg
-                            btn-block">Confimer mon passage</a>
+                            btn-block">Confirmer mon passage</a>
                          </div>
                     </div>
                     {% endif %}
