@@ -57,8 +57,6 @@ class PractitionerController extends AbstractController
 
         if ($nbrFreeRdv > 0){
             $this->addFlash('warning', "$nbrFreeRdv nouvelle(s) demandes(s) de visite sur votre secteur" );
-        } else {
-            $this->addFlash('warning', "Aucune demande de visite en attente" );
         }
 
 
