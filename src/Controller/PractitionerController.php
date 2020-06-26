@@ -52,9 +52,9 @@ class PractitionerController extends AbstractController
             ->findBy(['practitioner'=> null]));
 
         if ($nbrFreeRdv > 0){
-            $this->addFlash('info', "$nbrFreeRdv nouvelle(s) demandes(s) de visite sur votre secteur" );
+            $this->addFlash('warning', "$nbrFreeRdv nouvelle(s) demandes(s) de visite sur votre secteur" );
         } else {
-            $this->addFlash('info', "Aucune demande de visite en attente" );
+            $this->addFlash('warning', "Aucune demande de visite en attente" );
         }
 
 
