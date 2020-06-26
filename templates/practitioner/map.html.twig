@@ -1,0 +1,114 @@
+{% extends 'base_practitioner.html.twig' %}
+
+{% block stylesheets %}
+ {{ parent() }}
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            z-index: 0;
+            position: absolute;
+            top: 69px;
+            bottom: 0;
+            height: 92%;
+            width: 100%;
+        }
+
+        .link-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        #link {
+            z-index: 1;
+            position: absolute;
+            bottom: 30px;
+            margin: auto;
+        }
+
+        .marker {
+            background-image: url('/img/marker.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div id='map'>
+    </div>
+    <div class="link-container">
+        <a href="{{ path ('practitioner_index') }}" id="link" class="btn btn-secondary">Retour aux RDV</a>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        mapboxgl.accessToken = "{{ apiKey }}";
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: [4.81, 45.77],
+            zoom: 10
+        });
+
+
+        var geojson = {
+            type: 'FeatureCollection',
+            features: [
+                    {% for rdv in rdvs %}
+                {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [{{ rdv.longitude }}, {{ rdv.latitude }}]
+                },
+                properties: {
+                    title: '{{ rdv.patient.firstName }} {{ rdv.patient.lastName }}',
+                    description: '{{ rdv.adress }}'
+                }
+            },
+                 {% endfor %}
+                ]
+        };
+
+        // add markers to map
+        geojson.features.forEach(function(marker) {
+
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                    .setHTML('<h6>' + marker.properties.title + '</h6><p>' + marker.properties.description + '</p>'))
+                .addTo(map);
+        });
+
+    </script>
+{% endblock %}

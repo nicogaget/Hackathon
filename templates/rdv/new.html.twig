@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande de rendez vous{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1>Demander un rendez vous</h1>
+
+        {{ include('rdv/_form.html.twig') }}
+    </div>
+{% endblock %}
+

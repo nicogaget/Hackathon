@@ -354,7 +354,7 @@ template {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   margin-bottom: 0.5rem;
-  font-family: "Josefin Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
   line-height: 1.2;
   color: #5a5a5a;
@@ -9914,7 +9914,7 @@ h3 {
   }
 }
 .navbar {
-  font-family: "Josefin Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .bg-dark {
@@ -9926,7 +9926,7 @@ h3 {
 }
 
 .btn {
-  font-family: "Josefin Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 .btn, .btn:hover {
   color: #fff;
@@ -10025,11 +10025,11 @@ h3 {
 .table .thead-dark th {
   background-color: #78C2AD;
   border-color: rgba(0, 0, 0, 0.05);
-  font-family: "Josefin Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 legend {
-  font-family: "Josefin Sans", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Montserrat", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .dropdown-menu {
@@ -10100,8 +10100,89 @@ legend {
 }
 
 body {
-  background-color: lightgray;
-  font-family: "Raleway", sans-serif;
+  background-color: #ffffff;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, .navbar-brand {
+  font-family: "Pacifico", cursive;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+header {
+  padding-bottom: 30px;
+}
+
+#nav-bar {
+  z-index: 1;
+}
+#nav-bar .navbar-brand {
+  font-size: 1.8em;
+}
+#nav-bar a {
+  font-size: 1.2em;
+}
+
+.motto {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#rdv-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+  width: 100%;
+}
+#rdv-button button {
+  padding: 10px;
+  max-width: 310px;
+  font-size: 40px;
+}
+
+.card-rdv-btn {
+  margin-bottom: 10px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card ul, .card .card-footer {
+  text-align: left;
+}
+
+.confirmation {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.confirmation .text {
+  font-size: 16px;
+  text-align: left;
+  padding: 20px;
+}
+.confirmation button {
+  margin: 20px;
+}
+
+.index-btn {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.bonjour {
+  color: white;
 }
 
 /*# sourceMappingURL=app.css.map */

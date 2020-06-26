@@ -47,4 +47,18 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+    * @return User[] Returns an array of User objects
+    */
+    public function findAllNotInlude(string $value)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.lastName != :val')
+            ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

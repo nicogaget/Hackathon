@@ -3,6 +3,93 @@
 @import "../../node_modules/bootswatch/dist/minty/bootswatch";
 
 body {
-  background-color: lightgray;
-  font-family: 'Raleway', sans-serif;
+    background-color: #ffffff;
+
+
+    font-family: 'Open Sans', sans-serif;
 }
+
+h1, h2, h3, .navbar-brand {
+    font-family: 'Pacifico', cursive;
+}
+
+h1 {
+
+    text-align: center;
+    padding: 20px;
+}
+
+header {
+    padding-bottom: 30px;
+}
+
+#nav-bar {
+    z-index: 1;
+    .navbar-brand {
+        font-size: 1.8em;
+    }
+    a {
+        font-size: 1.2em;
+    }
+}
+
+.motto {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#rdv-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    width: 100%;
+    button {
+        padding: 10px;
+        max-width: 310px;
+        font-size: 40px;
+    }
+}
+
+.card-rdv-btn{
+    margin-bottom: 10px;
+}
+
+.form-container {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    ul, .card-footer {
+        text-align: left;
+    }
+}
+
+.confirmation {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .text {
+    font-size: 16px;
+    text-align: left;
+    padding: 20px;
+  }
+  button {
+    margin: 20px;
+  }
+}
+
+.index-btn{
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.bonjour{
+  color: white;
+}
+
