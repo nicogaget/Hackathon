@@ -46,15 +46,21 @@ class PractitionerController extends AbstractController
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
 
-<<<<<<< HEAD
-        $rdvs = $this->getDoctrine()
+        $nbrFreeRdv = count(
+            $this->getDoctrine()
             ->getRepository(Rdv::class)
-            ->findAll();
+            ->findBy(['practitioner'=> null]));
 
-=======
->>>>>>> 544bc13412e94f161c093a908e77fd86f74a520b
+        if ($nbrFreeRdv > 0){
+            $this->addFlash('primary', "$nbrFreeRdv nouvelle(s) demandes(s) de visite sur votre secteur" );
+        } else {
+            $this->addFlash('secondary', "Aucune demande de visite en attente" );
+        }
+
+
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
+            'nbrFreeRdv'=> $nbrFreeRdv
         ]);
     }
 

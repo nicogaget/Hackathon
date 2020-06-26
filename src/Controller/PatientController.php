@@ -24,7 +24,7 @@ class PatientController extends AbstractController
 {
     /**
      * @return Response
-     * @Route("/index",name="patient_index")
+     * @Route("/",name="patient_index")
      */
     public function index()
     {
