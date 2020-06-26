@@ -7,6 +7,7 @@ use App\Repository\RdvRepository;
 use App\Repository\UserRepository;
 use App\Entity\Rdv;
 use App\Services\GeocodingService;
+use App\Services\GeoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpClient\HttpClient;
@@ -35,18 +36,23 @@ class PractitionerController extends AbstractController
     public function index()
     {
 
+        $pract=new User;
+
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findBy(["lastName" => "Doctor"]);
+            ->findOneBy(["lastName" => "Doctor"]);
 
         $rdv = $this->getDoctrine()
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
 
+<<<<<<< HEAD
         $rdvs = $this->getDoctrine()
             ->getRepository(Rdv::class)
             ->findAll();
 
+=======
+>>>>>>> 544bc13412e94f161c093a908e77fd86f74a520b
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
         ]);
@@ -69,7 +75,6 @@ class PractitionerController extends AbstractController
         $coordY = $gps["features"][0]['geometry']['coordinates'][0];
         $doctor->setCoordX($coordX);
         $doctor->setCoordY($coordY);
-
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($doctor);
@@ -95,11 +100,8 @@ class PractitionerController extends AbstractController
                 $coordY = $gps["features"][0]['geometry']['coordinates'][0];
                 $aPatient->setCoordX($coordX);
                 $aPatient->setCoordY($coordY);
-                $rdv = $aPatient->getRdv();
-                if ($rdv) {
-
-                }
                 $entityManager->persist($aPatient);
+
             }
 
             // ajout du  rdv a la liste , mettre les test ici
@@ -113,6 +115,7 @@ class PractitionerController extends AbstractController
             'gps' => $gps,
         ]);
     }
+
 
     /**
      * @Route ("/map", name="practitioner_map")
@@ -148,7 +151,30 @@ class PractitionerController extends AbstractController
             ->findBy(['id' => $rdv]);
 
         return $this->render('/practitioner/map.html.twig', [
-            'rdvs' => $rdvs
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
         ]);
     }
+
+    /**
+     * @Route ("/accept/{id}", name="practitioner_accept_rdv")
+     * @param Rdv $rdv
+     * @return Response
+     */
+    public function acceptRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $pract = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+
+        $rdv->setPractitioner($pract);
+
+        $entityManager->persist($rdv);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('practitioner_index');
+    }
+
 }

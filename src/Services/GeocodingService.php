@@ -21,15 +21,12 @@ class GeocodingService
         $dotenv = new Dotenv();
         $this->rootPath = $rootPath;
         $dotenv->load($rootPath . '/.env.local');
-        $apiKey = $_ENV["API_TOKEN"];
-
-
-
+       $this->API_TOKEN = $_ENV["API_TOKEN"];
     }
 
     public function addresstoGPS(string $address)
     {
-        $response = $this->client->request('GET', "https://api.mapbox.com/geocoding/v5/mapbox.places/$address.json?access_token=pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q");
+        $response = $this->client->request('GET', "https://api.mapbox.com/geocoding/v5/mapbox.places/$address.json?access_token=$this->API_TOKEN");
         $result = $response->toArray();
         $this->response=$result;
         return $result;
@@ -37,7 +34,7 @@ class GeocodingService
 
     public function GPStoadress()
     {
-        $response = $this->client->request('GET', "https://api.mapbox.com/geocoding/v5/mapbox.places/chester.json?proximity=4.810245,45.772796&access_token=pk.eyJ1Ijoic2NhbWFuZGVyIiwiYSI6ImNrYnVzZDNwZzBtc24ycnF6OTk3d2I3aGUifQ.JwhJu4H3ab-durX82JuN0Q");
+        $response = $this->client->request('GET', "https://api.mapbox.com/geocoding/v5/mapbox.places/chester.json?proximity=$this->API_TOKEN");
         $result = $response->toArray();
         return $result;
     }
