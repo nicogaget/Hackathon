@@ -42,6 +42,11 @@ class PractitionerController extends AbstractController
         $rdv = $this->getDoctrine()
             ->getRepository(RDV::class)
             ->findBy(["practitioner" => $pract]);
+
+        $rdvs = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findAll();
+
         return $this->render('practitioner/index.html.twig', [
             'rdvs' => $rdv,
         ]);
