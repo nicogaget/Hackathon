@@ -144,12 +144,13 @@ class PractitionerController extends AbstractController
             ->findBy(['id' => $rdv]);
 
         return $this->render('/practitioner/map.html.twig', [
-            'rdvs' => $rdvs
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
         ]);
     }
 
     /**
-     * @Route ("/accept/{id}", name="practitioner_map_solo")
+     * @Route ("/accept/{id}", name="practitioner_accept_rdv")
      * @param Rdv $rdv
      * @return Response
      */
