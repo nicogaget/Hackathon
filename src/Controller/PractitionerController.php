@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use App\Entity\Rdv;
 use App\Services\GeocodingService;
 
+use App\Services\GeoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,21 +44,9 @@ class PractitionerController extends AbstractController
     public function rdvlist(GeocodingService $geocoding)
     {
 
-        // affectation  coordonées du docteur
-        $doctor = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findOneBy(["lastName" => "Doctor"]);
-
         // liste des rdv eligible pour le docteur
-        $rdvList = $this->getDoctrine()
-            ->getRepository(RDV::class)
-            ->findAll();
-        // recupération des autres users et affectation des coordonées si pas deja existantes
-
-
-        return $this->render('practitioner/list.html.twig', [
-            'rdvs' => $rdvList
-        ]);
+        $rdvList = $this->getDoctrine()->getRepository(RDV::class)->findAll();
+        return $this->render('practitioner/list.html.twig', ['rdvs' => $rdvList]);
     }
 
     /**

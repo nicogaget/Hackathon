@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Rdv;
 use App\Entity\User;
+use App\Services\GeoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,12 @@ class AppController extends AbstractController
      */
     public function index(GeocodingService $geocoding)
     {
+
+        // affectation  coordonées du docteur
+        $doctor = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+
         $entityManager = $this->getDoctrine()->getManager();
         // recupération des autres users et affectation des coordonées si pas deja existantes
         $rdvList = $this->getDoctrine()
@@ -36,6 +43,18 @@ class AppController extends AbstractController
                 $aRdv->setLongitude($long);
                 $entityManager->persist($aRdv);
             }
+        }
+
+        for ($i = 0; $i < 10; $i++) {
+            $geo = new GeoService();
+            $rdv = $rdvList[$i];
+            $dctLatitude = $doctor->getCoordX();
+            $dctLongitude = $doctor->getCoordY();
+            $rdvLat = $rdv->getLatitude();
+            $rdvLong = $rdv->getLongitude();
+            $distance = $geo->calcDistance($dctLatitude, $dctLongitude, $rdvLat, $rdvLong);
+            $rdv->setDistance($distance);
+
         }
         $entityManager->flush();
 

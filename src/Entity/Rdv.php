@@ -68,6 +68,11 @@ class Rdv
      */
     private $longitude;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $distance;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -189,6 +194,18 @@ class Rdv
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getDistance(): ?float
+    {
+        return $this->distance;
+    }
+
+    public function setDistance(?float $distance): self
+    {
+        $this->distance = $distance;
 
         return $this;
     }
