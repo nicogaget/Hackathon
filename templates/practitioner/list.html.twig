@@ -1,7 +1,30 @@
 {% extends 'base.html.twig' %}
-{% block body %}
-<h1>Bonjour</h1>
-    {{ gps.features.0.geometry.coordinates.0 }}
-    {{ gps.features.0.geometry.coordinates.1 }}
-
-{% endblock %}
+    {% block body %}
+        <div class="container-fluid">
+            <h1>Choisissez un rdv</h1>
+            <div class="rdv-list d-flex align-items-center flex-column flex-fill">
+                <a href="{{ path ('practitioner_waitmap') }}" class="d-flex align-items-center
+                flex-column pb-3">Voir tous les RDV sur la carte</a>
+                {% for rdv in rdvs %}
+                    {% if not rdv.practitioner %}
+                     <div class="card border-secondary mb-3 shadow" style="max-width: 18rem; min-width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>{{ rdv.patient.firstName }} {{ rdv.patient
+                                .lastName }}</strong></h4>
+                            <p class="card-text">{{ rdv.adress }}</p>
+                            <p class="card-text"><strong>{{ rdv.date|date('d/m/Y') }} , {{ rdv.creneau.title}}</strong></p>
+                            <p class="card-text">Distance : {{ rdv.distance|round()}} Km.</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <a href="{{ path('practitioner_map_solo', {'id': rdv.id}) }}">Voir sur la
+                                carte</a>
+                            </div>
+                            <a href="{{ path ('practitioner_accept_rdv', { "id": rdv.id }) }}" class="btn btn-primary
+                            btn-lg
+                            btn-block">Confirmer mon passage</a>
+                         </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+ {% endblock %}

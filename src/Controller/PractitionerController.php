@@ -19,8 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
+
+
     private $apiKey;
 
+    /**
+     * @Route("/", name="practitioner_index")
+     * @param GeocodingService $geocoding
+     */
     public function __construct(string $rootPath)
     {
         $dotenv = new Dotenv();
@@ -35,9 +41,7 @@ class PractitionerController extends AbstractController
      */
     public function index()
     {
-
         $pract=new User;
-
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(["lastName" => "Doctor"]);
@@ -71,55 +75,10 @@ class PractitionerController extends AbstractController
      */
     public function rdvlist(GeocodingService $geocoding)
     {
-        $gps = $geocoding->addresstoGPS();
-        // affectation  coordonées du docteur
-        $doctor = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findOneBy(["lastName" => "Doctor"]);
-        $gps=$geocoding->addresstoGPS($doctor->getAdress());
-        $coordX = $gps["features"][0]['geometry']['coordinates'][1];
-        $coordY = $gps["features"][0]['geometry']['coordinates'][0];
-        $doctor->setCoordX($coordX);
-        $doctor->setCoordY($coordY);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($doctor);
-
 
         // liste des rdv eligible pour le docteur
-        $rdvList = [];
-
-        // recupération des autres users et affectation des coordonées si pas deja existantes
-        $patients = $doctor = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAllNotInlude("Doctor");
-        for($i =0 ; $i < count($patients) ; $i++)
-        {
-            /**
-             * @var User[]
-             */
-            $aPatient = $patients[$i];
-            // affectation coordonées user
-            if(!$aPatient->getCoordX()) {
-                $gps = $geocoding->addresstoGPS($aPatient->getAdress());
-                $coordX = $gps["features"][0]['geometry']['coordinates'][1];
-                $coordY = $gps["features"][0]['geometry']['coordinates'][0];
-                $aPatient->setCoordX($coordX);
-                $aPatient->setCoordY($coordY);
-                $entityManager->persist($aPatient);
-
-            }
-
-            // ajout du  rdv a la liste , mettre les test ici
-            $rdv = $aPatient->getRdv();
-            $rdvList[] =$rdv;
-
-        }
-        $entityManager->flush();
-
-        return $this->render('practitioner/list.html.twig', [
-            'gps' => $gps,
-        ]);
+        $rdvList = $this->getDoctrine()->getRepository(RDV::class)->findAll();
+        return $this->render('practitioner/list.html.twig', ['rdvs' => $rdvList]);
     }
 
 
@@ -170,14 +129,44 @@ class PractitionerController extends AbstractController
     public function acceptRDV(RDV $rdv)
     {
         $entityManager = $this->getDoctrine()->getManager();
-
         $pract = $this->getDoctrine()
             ->getRepository(User::class)
             ->findOneBy(["lastName" => "Doctor"]);
-
         $rdv->setPractitioner($pract);
-
         $entityManager->persist($rdv);
+        $entityManager->flush();
+        return $this->redirectToRoute('practitioner_index');
+    }
+
+    /**
+     * @Route ("/waitmap", name="practitioner_waitmap")
+     */
+    public function waitMap()
+    {
+        $practitioner = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(["lastName" => "Doctor"]);
+
+        $rdvs = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findByNoPract();
+
+        return $this->render('/practitioner/map.html.twig', [
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
+        ]);
+    }
+
+     /*
+     * @Route ("/delete/{id}", name="practitioner_delete_rdv")
+     * @param Rdv $rdv
+     * @return Response
+     */
+    public function deleteRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($rdv);
         $entityManager->flush();
 
         return $this->redirectToRoute('practitioner_index');
