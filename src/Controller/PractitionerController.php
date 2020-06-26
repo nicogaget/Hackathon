@@ -138,4 +138,22 @@ class PractitionerController extends AbstractController
         return $this->redirectToRoute('practitioner_index');
     }
 
+    /**
+     * @Route ("/waitmap", name="practitioner_waitmap")
+     */
+    public function waitMap()
+    {
+        $practitioner = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findBy(["lastName" => "Doctor"]);
+
+        $rdvs = $this->getDoctrine()
+            ->getRepository(Rdv::class)
+            ->findByNoPract();
+
+        return $this->render('/practitioner/map.html.twig', [
+            'rdvs' => $rdvs,
+            'apiKey' => $this->apiKey
+        ]);
+    }
 }
