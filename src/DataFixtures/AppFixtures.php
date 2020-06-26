@@ -18,18 +18,18 @@ class AppFixtures extends Fixture
     const NB_PATIENT = 10;
     const ADDRESS =
         [
-      "4 Rue Sœur Bouvier, 69005 Lyon",
-      "1 Montée de Choulans, 69005 Lyon",
-      "17 Quai Joseph Gillet, 69316 Lyon",
-      "100 Rue des Granges, 69890 La Tour-de-Salvagny",
-      "Chemin du Vert Galant, 69170 Tarare",
+      "35, rue Lamartine, 69550 Saint-Jean-La-Bussière",
+      "Le mailler, 42630 Saint-Victo-Sur-Rhins",
+      "26, rue Roche Batie, 69240 Thizy-Les-Bourgs",
+      "5 rue Victor Hugo, 69240 Thizy-les-Bourgs",
+      "11 rue du Tinard, 69550 Cublize",
       "65 Rue du 11 Novembre, 69550 Amplepuis",
       "40 Rue de Belfort, 69550 Amplepuis",
-      "27 Rue Pierre Brossolette, 69210 L'Arbresle",
-      "800 Route de France, 69210 Fleurieux-sur-l'Arbresle",
-      "1150 Route de Sain-Bel, 69280 Marcy-l'Étoile",
-      "11 Rue Jules Verne, 69630 Chaponost",
-      "165 Chemin du Grand Revoyet, 69310 Pierre-Bénite",
+      "Le bourg, 69550 Ronno",
+      "La Mule, 42470 Machézal",
+      "Chemin des Enversins, 69170 Les Sauvages",
+      "Le Rocailler, 69170 Valsonne",
+      "La Planche, 42460 La Gresle",
     ];
 
     public function load(ObjectManager $manager)
@@ -64,10 +64,10 @@ class AppFixtures extends Fixture
             $aPractician = new  User();
             $aPractician->setFirstName("A.");
             $aPractician->setLastName("Doctor");
-            $aPractician->setCoordY(4.821767);
-            $aPractician->setCoordX(45.744859);
+            $aPractician->setCoordY(4.332057);
+            $aPractician->setCoordX(45.974352);
             $aPractician->setType($this->getReference("type_doctor"));
-            $aPractician->setAdress("22 Rue Seguin, 69002 Lyon");
+            $aPractician->setAdress("21 rue Auguste Villy, 69550 Amplepuis");
             $this->addReference("practitian_$i", $aPractician);
             $manager->persist($aPractician);
         }
