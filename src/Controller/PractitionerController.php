@@ -157,7 +157,7 @@ class PractitionerController extends AbstractController
         ]);
     }
 
-     /*
+    /**
      * @Route ("/delete/{id}", name="practitioner_delete_rdv")
      * @param Rdv $rdv
      * @return Response
