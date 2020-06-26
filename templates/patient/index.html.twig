@@ -10,7 +10,7 @@
 
                     <h2 class="card-header">Demande en attente de confirmation :</h2>
                     <div class="card-body">
-                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> {{ rdv.date|date("d / m ") }}  {{ rdv.creneau }}
+                        <h4 class="card-title">Vous avez fait une demande de consultation pour le<br> <b>{{ rdv.date|date("d / m ") }}  {{ rdv.creneau }}</b>
                     </div>
                     <div class="d-flex align-items-center flex-column flex-fill">
 {#                        <a class="btn btn-secondary card-rdv-btn" href="{{ path('') }}">supprimer votre demande</a>#}
@@ -27,7 +27,7 @@
 
                     <h2 class="card-header">Confirmation de Rendez vous</h2>
                     <div class="card-body">
-                        <h4 class="card-title">Le médecin {{ practitioner.firstName }} {{ practitioner.lastName }} vous confirme sa visite à votre domicile, le {{ rdv.date|date("d M") }} {{ rdv.creneau }}</h4>
+                        <h4 class="card-title">Le médecin {{ practitioner.firstName }} {{ practitioner.lastName }} vous confirme sa visite à votre domicile, le <b>{{ rdv.date|date("d M") }} {{ rdv.creneau }}</b></h4>
                     </div>
                 </div>
             </div>

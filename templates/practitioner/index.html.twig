@@ -1,6 +1,20 @@
 {% extends 'base_practitioner.html.twig' %}
 
 {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h5>{{ message }}</h5>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <h1>Vos prochains RDV</h1>
         <a href="{{ path ('practitioner_map') }}" class="d-flex align-items-center flex-column pb-3">Voir tous les RDV sur la carte</a>
