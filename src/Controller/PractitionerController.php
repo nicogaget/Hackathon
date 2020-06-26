@@ -183,4 +183,19 @@ class PractitionerController extends AbstractController
         return $this->redirectToRoute('practitioner_index');
     }
 
+    /**
+     * @Route ("/delete/{id}", name="practitioner_delete_rdv")
+     * @param Rdv $rdv
+     * @return Response
+     */
+    public function deleteRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($rdv);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('practitioner_index');
+    }
+
 }
