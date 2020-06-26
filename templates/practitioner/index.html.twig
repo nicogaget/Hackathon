@@ -11,7 +11,7 @@
                     {% for message in messages %}
                         <div class="alert alert-{{ label }}" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h5>{{ message }}</h5>
+                            <h5><a href="{{ path('practitioner_list') }}">{{ message }}</a></h5>
                         </div>
                     {% endfor %}
                 {% endfor %}
