@@ -18,7 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PractitionerController extends AbstractController
 {
-     /** @Route("/", name="practitioner_index")
+    /**
+     * @Route("/", name="practitioner_index")
      * @param GeocodingService $geocoding
      * @return Response
      */
@@ -61,6 +62,24 @@ class PractitionerController extends AbstractController
         return $this->render('/practitioner/map.html.twig', [
             'rdvs' => $rdvs
         ]);
+    }
+
+    /**
+     * @Route ("/accept/{id}", name="practitioner_accept_rdv")
+     * @param Rdv $rdv
+     *
+     * @return Response
+     */
+    public function acceptRDV(RDV $rdv)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $pract = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(["lastName" => "Doctor"]);
+        $rdv->setPractitioner($pract);
+        $entityManager->persist($rdv);
+        $entityManager->flush();
+        return $this->redirectToRoute('practitioner_index');
     }
 
 }

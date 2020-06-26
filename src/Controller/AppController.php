@@ -53,8 +53,9 @@ class AppController extends AbstractController
             $rdvLat = $rdv->getLatitude();
             $rdvLong = $rdv->getLongitude();
             $distance = $geo->calcDistance($dctLatitude, $dctLongitude, $rdvLat, $rdvLong);
+            if($distance < 1 ) $distance = 1;
             $rdv->setDistance($distance);
-
+            $entityManager->persist($rdv);
         }
         $entityManager->flush();
 
